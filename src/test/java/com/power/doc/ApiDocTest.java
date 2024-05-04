@@ -3,6 +3,7 @@ package com.power.doc;
 import com.power.common.util.DateTimeUtil;
 import com.power.doc.builder.ApiDocBuilder;
 import com.power.doc.builder.HtmlApiDocBuilder;
+import com.power.doc.builder.openapi.ThriftIDLBuilder;
 import com.power.doc.constants.FrameworkEnum;
 import com.power.doc.model.ApiConfig;
 import com.power.doc.model.SourceCodePath;
@@ -37,22 +38,20 @@ public class ApiDocTest {
         // config.setTornaDebug(true);
         config.setAllInOne(false);
         config.setCoverOld(true);
-        config.setOutPath("D://md3");
+        config.setOutPath("./");
         // config.setMd5EncryptedHtmlName(true);
         config.setFramework(FrameworkEnum.SPRING.getFramework());
         // 不指定SourcePaths默认加载代码为项目src/main/java下的
         config.setSourceCodePaths(
                 SourceCodePath.builder().setDesc("本项目代码")
-                        .setPath("C:\\Users\\xingzi\\Desktop\\example")
+                        .setPath("/Users/didi/open_src/manhattan-fatman-vehicle-center")
         );
-        config.setPackageFilters("com.example.demo.controller.*");
-
 
         config.setJarSourcePaths(SourceCodePath.builder()
-                .setPath("D:\\xxxx-sources.jar")
+                .setPath("/Users/didi/.gradle/caches/modules-2/files-2.1/com.xiaoju.manhattan.insurance/base/2.0.25.RELEASE/e746a45896e9c6d18f4577c8955e049525e68402/base-2.0.25.RELEASE-sources.jar")
         );
         long start = System.currentTimeMillis();
-        HtmlApiDocBuilder.buildApiDoc(config);
+        ThriftIDLBuilder.buildOpenApi(config);
         // HtmlApiDocBuilder.buildApiDoc(config);
         long end = System.currentTimeMillis();
         DateTimeUtil.printRunTime(end, start);

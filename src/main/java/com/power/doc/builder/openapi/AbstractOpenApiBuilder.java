@@ -168,7 +168,7 @@ public abstract class AbstractOpenApiBuilder {
         }
 
         if (OPENAPI_2_COMPONENT_KRY.equals(componentKey) && !isRep) {
-            content.put("name", apiMethodDoc.getName());
+            content.put("name", apiMethodDoc.getName() + "Req");
         }
         if (OPENAPI_3_COMPONENT_KRY.equals(componentKey) &&
                 (!isRep && apiConfig.isRequestExample() || (isRep && apiConfig.isResponseExample()))) {
@@ -368,7 +368,7 @@ public abstract class AbstractOpenApiBuilder {
      *
      * @param apiParam ApiParam
      */
-    private Map<String, Object> buildPropertiesData(ApiParam apiParam, Map<String, Object> component, boolean isResp) {
+    protected Map<String, Object> buildPropertiesData(ApiParam apiParam, Map<String, Object> component, boolean isResp) {
         Map<String, Object> propertiesData = new HashMap<>();
         String openApiType = DocUtil.javaTypeToOpenApiTypeConvert(apiParam.getType());
         //array object file map

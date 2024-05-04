@@ -223,6 +223,10 @@ public class ApiDoc implements Comparable<ApiDoc> {
         return tagRefs;
     }
 
+    public void clearTagRefs() {
+        tagRefs.clear();
+    }
+
     @Override
     public int compareTo(ApiDoc o) {
         if (Objects.nonNull(o.getDesc())) {

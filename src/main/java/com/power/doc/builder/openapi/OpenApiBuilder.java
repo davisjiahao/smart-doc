@@ -113,7 +113,7 @@ public class OpenApiBuilder extends AbstractOpenApiBuilder {
      *
      * @param config Configuration of smart-doc
      */
-    private static List<Map<String, Object>> buildServers(ApiConfig config) {
+    protected static List<Map<String, Object>> buildServers(ApiConfig config) {
         List<Map<String, Object>> serverList = new ArrayList<>();
         Map<String, Object> serverMap = new HashMap<>(8);
         serverMap.put("url", config.getServerUrl() == null ? "" : config.getServerUrl());

@@ -103,7 +103,7 @@ public class SwaggerBuilder extends AbstractOpenApiBuilder {
      *
      * @param apiConfig Configuration of smart-doc
      */
-    private static Map<String, Object> buildInfo(ApiConfig apiConfig) {
+    protected static Map<String, Object> buildInfo(ApiConfig apiConfig) {
         Map<String, Object> infoMap = new HashMap<>(8);
         infoMap.put("title", apiConfig.getProjectName() == null ? "Project Name is Null." : apiConfig.getProjectName());
         infoMap.put("version", "1.0.0");

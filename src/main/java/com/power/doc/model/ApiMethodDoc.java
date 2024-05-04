@@ -220,6 +220,9 @@ public class ApiMethodDoc implements Serializable, Cloneable {
 
     private final Set<TagDoc> tagRefs = Collections.synchronizedSet(new LinkedHashSet<>());
 
+    public void clearTagRefs() {
+        tagRefs.clear();
+    }
     public Integer getIsRequestArray() {
         return isRequestArray;
     }
