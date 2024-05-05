@@ -64,8 +64,8 @@ service ${strutil.replace (info.name,"Controller","Service")} {
         }
       println("     )");
       println("     (");
-      println("      timeoutMsec=\"1000\"");
-      println("      connectTimeoutMsec=\"1000\"");
+      println("      timeoutMsec=\"500\"");
+      println("      connectTimeoutMsec=\"500\"");
       println("      path=\"" + path + "\"");
       println("      httpMethod=\"" + httpMethod + "\"");
       println("      contentType=\"" + contentTypeFlag + "\"");
@@ -74,4 +74,11 @@ service ${strutil.replace (info.name,"Controller","Service")} {
       }
   }
 %>
-}
+} (
+     version="1.0.0"
+     servName="${servers[0].url}"
+     servType="http"
+     /** 超时配置 */
+     timeoutMsec="500"
+     connectTimeoutMsec="500"
+ )

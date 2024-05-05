@@ -3,6 +3,7 @@ package com.power.doc;
 import com.power.common.util.DateTimeUtil;
 import com.power.doc.builder.ApiDocBuilder;
 import com.power.doc.builder.HtmlApiDocBuilder;
+import com.power.doc.builder.openapi.DrpcIDLBuilder;
 import com.power.doc.builder.openapi.ThriftIDLBuilder;
 import com.power.doc.constants.FrameworkEnum;
 import com.power.doc.model.ApiConfig;
@@ -52,7 +53,7 @@ public class ApiDocTest {
                 .setPath("/Users/didi/.gradle/caches/modules-2/files-2.1/com.xiaoju.manhattan.insurance/base/2.0.25.RELEASE/e746a45896e9c6d18f4577c8955e049525e68402/base-2.0.25.RELEASE-sources.jar")
         );
         long start = System.currentTimeMillis();
-        ThriftIDLBuilder.buildOpenApi(config);
+        DrpcIDLBuilder.buildOpenApi(config);
         // HtmlApiDocBuilder.buildApiDoc(config);
         long end = System.currentTimeMillis();
         DateTimeUtil.printRunTime(end, start);
