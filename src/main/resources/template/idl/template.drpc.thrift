@@ -1,6 +1,6 @@
-namespace php Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
-namespace go  Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
-namespace java  Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
+namespace php Dirpc.SDK.${strutil.replace(info.name,"Controller","")}
+namespace go  Dirpc.SDK.${strutil.replace(info.name,"Controller","")}
+namespace java  Dirpc.SDK.${strutil.replace(info.name,"Controller","")}
 
 const string serverName = ${"dirpc." + strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
 const string groupId = ${"com.didichuxing.dirpc." + strutil.toLowerCase(info.projectName)}
@@ -19,7 +19,12 @@ const string version = "1.0.0"
         var fieldInfo = property.value;
         println("   /**" + fieldInfo.description + "**/");
         var fieldType = solveThriftFieldType(fieldInfo);
-        println("   " + idx + ": optional " + fieldType + " " + fieldName + ",");
+//        if (!propertyLP.last) {
+//            println("   " + idx + ": optional " + fieldType + " " + fieldName + ",");
+//        } else {
+//            println("   " + idx + ": optional " + fieldType + " " + fieldName);
+//        }
+        println("   " + idx + ": optional " + fieldType + " " + fieldName);
         idx++;
       }
       println("}");
@@ -48,7 +53,11 @@ service ${strutil.replace (info.name,"Controller","Service")} {
                     if (parameter.required) {
                         requiredFlag = "required";
                     }
-                    println("     " + parameterLP.index + ": " + requiredFlag + " " + solveThriftFieldType(parameter.schema) + " " + parameter.name + ",");
+                    if (!parameterLP.last) {
+                       println("     " + parameterLP.index + ": " + solveThriftFieldType(parameter.schema) + " " + parameter.name + ",");
+                    } else {
+                       println("     " + parameterLP.index + ": " + solveThriftFieldType(parameter.schema) + " " + parameter.name);
+                    }
                 }
                 break;
             default:
@@ -59,7 +68,7 @@ service ${strutil.replace (info.name,"Controller","Service")} {
                     }
                     var contentData = contentInfo.value;
                     var reqType = solveThriftFieldType(contentData.schema);
-                    println("     " + "1: required " + reqType + " " + reqType);
+                    println("     " + "1: " + reqType + " " + reqType);
                 }
         }
       println("     )");
@@ -69,7 +78,7 @@ service ${strutil.replace (info.name,"Controller","Service")} {
       println("      path=\"" + path + "\"");
       println("      httpMethod=\"" + httpMethod + "\"");
       println("      contentType=\"" + contentTypeFlag + "\"");
-      println("      );");
+      println("      )");
       break;
       }
   }

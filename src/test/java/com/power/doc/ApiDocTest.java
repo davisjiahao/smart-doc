@@ -24,7 +24,8 @@ public class ApiDocTest {
     @Test
     public void testBuilderControllersApi() {
         ApiConfig config = new ApiConfig();
-        config.setServerUrl("http://127.0.0.1:8899");
+        config.setAllInOne(true);
+        config.setServerUrl("disf!strategic-manhattan-fatman-manhattan_fatman_vehicle_center");
         // config.setStrict(true);
         config.setOpenUrl("http://localhost:7700/api");
         config.setAppToken("be4211613a734b45888c075741680e49");
@@ -43,6 +44,7 @@ public class ApiDocTest {
         config.setOutPath("./");
         // config.setMd5EncryptedHtmlName(true);
         config.setFramework(FrameworkEnum.SPRING.getFramework());
+        config.setPackageExcludeFilters("com.xiaoju.manhattan.vehicle.web.AdminController");
         // 不指定SourcePaths默认加载代码为项目src/main/java下的
         config.setSourceCodePaths(
                 SourceCodePath.builder().setDesc("本项目代码")
