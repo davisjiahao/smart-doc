@@ -74,6 +74,9 @@ public class ThriftIDLBuilder extends OpenApiBuilder {
 
 
     public void openApiCreate(ApiConfig config, List<ApiDoc> apiDocList) {
+        if (apiDocList == null || apiDocList.size() == 0) {
+            return;
+        }
         this.setComponentKey(getModuleName());
         if (config.isAllInOne()) {
             buildFile(config, apiDocList, config.getProjectName());
@@ -175,7 +178,7 @@ public class ThriftIDLBuilder extends OpenApiBuilder {
     protected void buildFile(ApiConfig config, List<ApiDoc> apiDocList, String fileName) {
         Map<String, Object> json = new HashMap<>(8);
         json.put("openapi", "3.0.3");
-        json.put("info", buildInfo(config, fileName));
+        json.put("info", buildInfo(config, fileName, apiDocList.get(0).getPackageName().substring(0, apiDocList.get(0).getPackageName().lastIndexOf('.'))));
         json.put("servers", buildServers(config));
         Set<OpenApiTag> tags = new HashSet<>();
         json.put("tags", tags);
@@ -234,9 +237,11 @@ public class ThriftIDLBuilder extends OpenApiBuilder {
         return pathMap;
     }
 
-    protected static Map<String, Object> buildInfo(ApiConfig apiConfig, String fileName) {
+    protected static Map<String, Object> buildInfo(ApiConfig apiConfig, String fileName, String packageName) {
         Map<String, Object> infoMap = SwaggerBuilder.buildInfo(apiConfig);
         infoMap.put("name", fileName);
+        infoMap.put("packageName", packageName);
+        infoMap.put("projectName", apiConfig.getProjectName());
         return infoMap;
     }
 

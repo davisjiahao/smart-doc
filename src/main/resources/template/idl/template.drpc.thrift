@@ -1,3 +1,12 @@
+namespace php Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
+namespace go  Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
+namespace java  Dirpc.SDK.${strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
+
+const string serverName = ${"dirpc." + strutil.toLowerCase(info.projectName + "." + strutil.replace(info.name,"Controller",""))}
+const string groupId = ${"com.didichuxing.dirpc." + strutil.toLowerCase(info.projectName)}
+const string artifactId = ${strutil.toLowerCase(strutil.replace(info.name,"Controller",""))}
+const string version = "1.0.0"
+
 <%
   // struct
   for(entry in components['schemas']){
@@ -30,6 +39,7 @@ service ${strutil.replace (info.name,"Controller","Service")} {
         println("   /**" + methodInfo.description + "**/");
         var fieldTypeRes = solveThriftFieldType(methodInfo["responses"]["200"]["content"]["*/*"]["schema"]);
         println("   " + fieldTypeRes + " " + methodInfo.operationId + "(");
+        var contentTypeFlag = "form";
         switch(httpMethod){
             case "get":
                 for(parameter in methodInfo.parameters){
@@ -44,13 +54,23 @@ service ${strutil.replace (info.name,"Controller","Service")} {
             default:
                 for(contentInfo in methodInfo.requestBody.content){
                     var contentType = contentInfo.key;
+                    if (strutil.contain(contentType, "json")) {
+                        contentTypeFlag = "json";
+                    }
                     var contentData = contentInfo.value;
                     var reqType = solveThriftFieldType(contentData.schema);
                     println("     " + "1: required " + reqType + " " + reqType);
                 }
-                break;
         }
-      println("     );");
+      println("     )");
+      println("     (");
+      println("      timeoutMsec=\"1000\"");
+      println("      connectTimeoutMsec=\"1000\"");
+      println("      path=\"" + path + "\"");
+      println("      httpMethod=\"" + httpMethod + "\"");
+      println("      contentType=\"" + contentTypeFlag + "\"");
+      println("      );");
+      break;
       }
   }
 %>

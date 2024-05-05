@@ -27,6 +27,7 @@ public class ApiDocTest {
         // config.setStrict(true);
         config.setOpenUrl("http://localhost:7700/api");
         config.setAppToken("be4211613a734b45888c075741680e49");
+        config.setProjectName("vehicle");
         // config.setAppToken("7b0935531d1144e58a86d7b4f2ad23c6");
 
         config.setDebugEnvName("测试环境");

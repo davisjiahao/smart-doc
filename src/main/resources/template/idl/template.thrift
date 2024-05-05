@@ -1,3 +1,7 @@
+namespace cpp ${info.packageName}
+namespace go  ${info.packageName}
+namespace java  ${info.packageName}
+
 <%
   // struct
   for(entry in components['schemas']){
