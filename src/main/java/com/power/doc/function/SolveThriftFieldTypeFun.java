@@ -57,9 +57,9 @@ public class SolveThriftFieldTypeFun implements Function {
                     break;
                 case "map":
                     if (typeInfo.get("items") == null) {
-                        fieldType = "list<string,string>";
+                        fieldType = "map<string,string>";
                     } else {
-                        fieldType = "list<string," + solveType((Map<String, Object>) typeInfo.get("items")) + ">";
+                        fieldType = "map<string," + solveType((Map<String, Object>) typeInfo.get("items")) + ">";
                     }
                     break;
                 case "number":
